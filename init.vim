@@ -68,11 +68,21 @@ set expandtab "tabを複数のspaceに置き換え
 set tabstop=4 "tabは半角2文字
 set shiftwidth=4 "tabの幅
 set whichwrap=b,s,h,l,<,>,[,] " カーソルを行頭、行末で止まらないようにする
-set list listchars=tab:»-,trail:-,nbsp:%,eol:↲
+set list listchars=tab:»-,trail:-,nbsp:%,eol:↲ " タブ、空白、改行を表示 :set nolist で非表示に変更
+" ctlr+j,h でカーソル部分から改行
+nnoremap <C-j>h i<CR><ESC>
+" ctlr+j,k でカーソル上行に改行
+nnoremap <C-j>k O<ESC>
+" ctlr+j,j でカーソル下行に改行
+nnoremap <C-j>j o<ESC>
 ""Ctrl+w,s で横分割
 "nmap <C-W>s :sp<CR>
 ""Ctrl+w,v で縦分割
 "nmap <C-W>v :vsp<CR>
+" ctrl+l で文末へ移動
+nmap <C-l> $
+" ctrl+h で文頭へ移動
+nmap <C-h> ^
 
 "------------------------------------------------------------
 " tab setting
