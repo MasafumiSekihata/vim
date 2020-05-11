@@ -83,10 +83,13 @@ nnoremap <C-j>j o<ESC>
 nmap <C-l> $
 " ctrl+h で文頭へ移動
 nmap <C-h> ^
+" Ctrl+@ でエスケープ
+nmap <C-@> <ESC>
 
 "------------------------------------------------------------
 " tab setting
 "------------------------------------------------------------
+nnoremap <C-T>n :tabnew<CR>
 nnoremap <C-T>l :tabnext<CR>
 nnoremap <C-T>h :tabprevious<CR>
 
