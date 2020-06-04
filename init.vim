@@ -39,6 +39,14 @@ endif
 
 
 "------------------------------------------------------------
+" mode settinng
+"------------------------------------------------------------
+"nmap <C-t><C-t> :split|term<CR>
+:command Term :split|term
+:command Terminal :split|term
+inoremap jj <ESC>
+
+"------------------------------------------------------------
 " encode setting
 "------------------------------------------------------------
 set encoding=utf-8
@@ -85,6 +93,12 @@ nmap <C-l> $
 nmap <C-h> ^
 " Ctrl+@ でエスケープ
 nmap <C-@> <ESC>
+" space + j で10*j
+noremap <space>j 10j
+" space + k で10*k
+noremap <space>k 10k
+" Y で行内のカーソル以降をコピー
+nnoremap Y y$
 
 "------------------------------------------------------------
 " tab setting
@@ -116,13 +130,6 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " command line setting
 "------------------------------------------------------------
 set wildmode=longest,full "リスト補完
-
-"------------------------------------------------------------
-" terminal設定
-"------------------------------------------------------------
-"nmap <C-t><C-t> :split|term<CR>
-:command Term :split|term
-:command Terminal :split|term
 
 "------------------------------------------------------------
 " FZF設定

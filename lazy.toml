@@ -12,7 +12,7 @@ on_ft = 'toml'
 repo ='Shougo/defx.nvim'
 on_cmd = 'Defx'
 hook_add = '''
-    nnoremap <silent> <Space>f :<C-u>Defx `expand('%:p:h')` -search=`expand('%:p')` -listed -resume -buffer-name=tab`tabpagenr()`<CR>
+    nnoremap <silent> <Space>f :<C-u>Defx -new `expand('%:p:h')` -search=`expand('%:p')` -listed -resume -buffer-name=tab`tabpagenr()`<CR>
 '''
 hook_source = '''
     function! Root(path) abort
@@ -21,7 +21,7 @@ hook_source = '''
     call defx#custom#source('file', {'root': 'Root',})
     call defx#custom#column('filename', {'directory_icon': '+', 'opened_icon': '-',})
     call defx#custom#column('mark', {'readonly_icon': '✗', 'selected_icon': '✓',})
-    call defx#custom#option('_', {'columns': 'mark:indent:filename:type:size:time',})
+    call defx#custom#option('_', {'columns': 'mark:indent:filename:type:size:time','toggle':1,})
 '''
 
 [plugins.ftplugin]
