@@ -12,7 +12,7 @@ on_ft = 'toml'
 repo ='Shougo/defx.nvim'
 on_cmd = 'Defx'
 hook_add = '''
-    nnoremap <silent> <Space>f :<C-u>Defx /Users/sekihatamasafumi/.config/nvim /Users/sekihatamasafumi/Desktop/書籍まとめ -new `expand('%:p:h')` -search=`expand('%:p')` -listed -resume -buffer-name=tab`tabpagenr()`<CR>
+    nnoremap <silent> <Space>f :<C-u>Defx /Users/sekihatamasafumi/.config/nvim /Users/sekihatamasafumi/Desktop/書籍まとめ `expand('%:p:h')` -search=`expand('%:p')` -listed -resume -buffer-name=tab`tabpagenr()`<CR>
 '''
 hook_source = '''
     function! Root(path) abort
