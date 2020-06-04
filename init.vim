@@ -45,6 +45,7 @@ endif
 :command Term :split|term
 :command Terminal :split|term
 inoremap jj <ESC>
+set timeoutlen=500
 
 "------------------------------------------------------------
 " encode setting
@@ -99,13 +100,17 @@ noremap <space>j 10j
 noremap <space>k 10k
 " Y で行内のカーソル以降をコピー
 nnoremap Y y$
+nnoremap j gj
+vnoremap j gj
+nnoremap k gk
+vnoremap k gk
 
 "------------------------------------------------------------
 " tab setting
 "------------------------------------------------------------
-nnoremap <C-T>n :tabnew<CR>
-nnoremap <C-T>l :tabnext<CR>
-nnoremap <C-T>h :tabprevious<CR>
+nnoremap <space>tn :tabnew<CR>
+nnoremap <space>tl :tabnext<CR>
+nnoremap <space>th :tabprevious<CR>
 
 "------------------------------------------------------------
 " cursorl setting

@@ -6,12 +6,12 @@
 [[plugins]]                                    
 repo = 'Shougo/dein.vim'                                          
 
-[[plugins]] # 統合インターフェース
-repo   = 'Shougo/unite.vim'
+#[[plugins]] # 統合インターフェース
+#repo   = 'Shougo/unite.vim'
 
-[[plubins]] # 
-repo      = 'Shougo/neomru.vim'
-on_source = ['unite.vim']
+#[[plubins]] # 
+#repo      = 'Shougo/neomru.vim'
+#on_source = ['unite.vim']
 
 #------------------------------------
 # denite setting
@@ -40,23 +40,19 @@ hook_add = '''
     endfunction
 
     " deniteマッピング
-    nnoremap <silent> ,f :<C-u>Denite file/rec<CR>
-    nnoremap <silent> ,l :<C-u>Denite line<CR>
-    nnoremap <silent> ,g :<C-u>Denite grep<CR>
-    nnoremap <silent> ,cg :<C-u>DeniteCursorWord grep<CR>
-    nnoremap <silent> ,b : <C-u>Denite buffer<CR>
+    nnoremap <silent> <space>df :<C-u>Denite file/rec<CR>
+    nnoremap <silent> <space>dl :<C-u>Denite line<CR>
+    nnoremap <silent> <space>dg :<C-u>Denite grep<CR>
+    nnoremap <silent> <space>dcg :<C-u>DeniteCursorWord grep<CR>
+    nnoremap <silent> <space>db : <C-u>Denite buffer<CR>
 '''
 
 hook_post_source = '''
     call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
     call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
     call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm'])
-
     call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
-
     call denite#custom#kind('file', 'default_action', 'split')
-
     call denite#custom#var('grep', {
         \ 'command': ['ag'],
         \ 'default_opts': ['-i', '--vimgrep'],
@@ -65,7 +61,6 @@ hook_post_source = '''
         \ 'separator': ['--'],
         \ 'final_opts': [],
         \ })
-
     call denite#custom#var('grep', 'command', ['ag'])
     call denite#custom#var('grep', 'recursive_opts', [])
     call denite#custom#var('grep', 'pattern_opt', [])
