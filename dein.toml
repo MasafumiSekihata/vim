@@ -6,13 +6,6 @@
 [[plugins]]                                    
 repo = 'Shougo/dein.vim'                                          
 
-#[[plugins]] # 統合インターフェース
-#repo   = 'Shougo/unite.vim'
-
-#[[plubins]] # 
-#repo      = 'Shougo/neomru.vim'
-#on_source = ['unite.vim']
-
 #------------------------------------
 # denite setting
 #------------------------------------
