@@ -1,8 +1,8 @@
 ""------------------------------------------------------------
 " python set up
 "------------------------------------------------------------
-let g:python_host_prog=$PYENV_ROOT.'/versions/neovim-2/bin/python'
-let g:python3_host_prog=$PYENV_ROOT.'/versions/neovim-3/bin/python'
+let g:python_host_prog=$PYENV_ROOT.'/versions/2.7.18/bin/python'
+let g:python3_host_prog=$PYENV_ROOT.'/versions/3.9.0b3/bin/python'
 
 ""------------------------------------------------------------
 " dein.vim set up
@@ -47,9 +47,6 @@ endif
 "------------------------------------------------------------
 " mode settinng
 "------------------------------------------------------------
-"nmap <C-t><C-t> :split|term<CR>
-:command Term :split|term
-:command Terminal :split|term
 inoremap jj <ESC>
 set timeoutlen=500
 
@@ -117,6 +114,12 @@ vnoremap k gk
 nnoremap <space>tn :tabnew<CR>
 nnoremap <space>tl :tabnext<CR>
 nnoremap <space>th :tabprevious<CR>
+nnoremap <space>tt :tab term<CR>
+"
+"------------------------------------------------------------
+" statusline setting
+"------------------------------------------------------------
+set statusline=%F%m\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
 
 "------------------------------------------------------------
 " cursorl setting
