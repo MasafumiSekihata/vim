@@ -115,6 +115,8 @@ nnoremap <space>tn :tabnew<CR>
 nnoremap <space>tl :tabnext<CR>
 nnoremap <space>th :tabprevious<CR>
 nnoremap <space>tt :tab term<CR>
+nnoremap <space>tmh :tabm -1<CR>
+nnoremap <space>tml :tabm +1<CR>
 "
 "------------------------------------------------------------
 " statusline setting
@@ -168,4 +170,3 @@ nnoremap <C-p> :Files<CR>
 "let g:table_mode_corner = '|' "テーブル整形
 "let g:previm_open_cmd = 'open -a safari' "プレビュー
 "let g:previm_disable_default_css = 1 "デフォルトCSSオフ
-"let g:previm_custom_css_path = '/Users/sekihatamasafumi/Library/Application Support/abnerworks.Typora/themes/misty-light-macos.css' "カスタムCSSパス
