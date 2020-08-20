@@ -3,7 +3,7 @@
 "------------------------------------------------------------
 let g:python_host_prog=$PYENV_ROOT.'/versions/2.7.18/bin/python'
 let g:python3_host_prog=$PYENV_ROOT.'/versions/3.9.0b3/bin/python'
-
+"
 ""------------------------------------------------------------
 " dein.vim set up
 "------------------------------------------------------------
@@ -68,16 +68,12 @@ set autoread "変更を自動読み込み
 " edita setting
 "------------------------------------------------------------
 set number "行番号表示
-set clipboard=unnamed "クリップボード連携 
+set clipboard=unnamed "クリップボード連携
 set splitbelow "水平分割時に下に表示
 set splitright "縦分割時に右に表示
 "set noequalalways "分割時に自動調整を無効化
-set wildmenu "コマンドモードの補完
-set laststatus=2 "ステータスライン表示
-set background=dark "コマンド右下表示
-set showcmd "入力中のコマンドのステータス表示
 set expandtab "tabを複数のspaceに置き換え
-set tabstop=4 "tabは半角2文字
+set tabstop=4 "tabは半角4文字
 set shiftwidth=4 "tabの幅
 set whichwrap=b,s,h,l,<,>,[,] " カーソルを行頭、行末で止まらないようにする
 set list listchars=tab:»-,trail:-,nbsp:%,eol:↲ " タブ、空白、改行を表示 :set nolist で非表示に変更
@@ -98,15 +94,26 @@ nmap <C-h> ^
 " Ctrl+@ でエスケープ
 nmap <C-@> <ESC>
 " space + j で10*j
-noremap <space>j 10j
+noremap <space>j 7j
 " space + k で10*k
-noremap <space>k 10k
+noremap <space>k 7k
 " Y で行内のカーソル以降をコピー
 nnoremap Y y$
+" j,k移動
 nnoremap j gj
 vnoremap j gj
 nnoremap k gk
 vnoremap k gk
+" インクリメント/デクリメント
+nnoremap + <C-a>
+nnoremap - <C-x>
+" ヤンク制御
+nnoremap x "_x
+nnoremap D "_D
+nnoremap c "_c
+" usキーボード対応
+nnoremap ; :
+nnoremap : ;
 
 "------------------------------------------------------------
 " tab setting
@@ -114,14 +121,31 @@ vnoremap k gk
 nnoremap <space>tn :tabnew<CR>
 nnoremap <space>tl :tabnext<CR>
 nnoremap <space>th :tabprevious<CR>
-nnoremap <space>tt :tab term<CR>
 nnoremap <space>tmh :tabm -1<CR>
 nnoremap <space>tml :tabm +1<CR>
-"
+
+"------------------------------------------------------------
+" buffer setting
+"------------------------------------------------------------
+set hidden
+nnoremap <space>bb :ls<CR>
+nnoremap <space>bh :bprev<CR>
+nnoremap <space>bl :bnext<CR>
+
+"------------------------------------------------------------
+" terminal setting
+"------------------------------------------------------------
+nnoremap <space>tt :tab term<CR>
+
 "------------------------------------------------------------
 " statusline setting
 "------------------------------------------------------------
-set statusline=%F%m\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
+set laststatus=2 "ステータスライン表示
+set wildmenu "コマンドモードの補完
+set pumheight=15 "コマンドモードの補完候補数
+set background=dark "コマンド右下表示
+set showcmd "入力中のコマンドのステータス表示
+"set statusline=%F%m\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
 
 "------------------------------------------------------------
 " cursorl setting
@@ -131,6 +155,7 @@ set cursorline "カーソル行ハイライト
 "set cursorcolumn "カーソル列ハイライト
 set virtualedit=onemore "最終行+1
 set showmatch "対応括弧表示
+set matchtime=1 "対応括弧表示時間0.1秒
 
 "------------------------------------------------------------
 " search setting
@@ -140,7 +165,7 @@ set incsearch "インクリメンタルサーチ
 set ignorecase "小文字検索時は大文字区別なし
 set smartcase "大文字検索時は大文字区別あり
 "ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap <C-n> :nohlsearch<CR><Esc>
 
 "------------------------------------------------------------
 " command line setting

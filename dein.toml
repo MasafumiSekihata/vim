@@ -1,16 +1,16 @@
 # プラグインを変更/追加した場合は :call dein#update() を実行
 
-#------------------------------------
+#------------------------------------------------------------------------
 # dein setting
-#------------------------------------
-[[plugins]]                                    
-repo = 'Shougo/dein.vim'                                          
+#------------------------------------------------------------------------
+[[plugins]]
+repo = 'Shougo/dein.vim'
 
-#------------------------------------
+#------------------------------------------------------------------------
 # denite setting
-#------------------------------------
+#------------------------------------------------------------------------
 [[plugins]] # denit
-repo = 'Shougo/denite.nvim'                                    
+repo = 'Shougo/denite.nvim'
 hook_add = '''
 
     " denite設定呼び出し
@@ -68,22 +68,94 @@ hook_post_source = '''
 '''
 
 
-#------------------------------------
-# visual setting plugin
-#------------------------------------
-[[plugins]] # colorSchem
-repo = 'sjl/badwolf'                                    
+#------------------------------------------------------------------------
+# statusLine setting plugin
+#------------------------------------------------------------------------
+[[plugins]] # lightline
+repo = 'itchyny/lightline.vim'
+hook_add ='''
 
-#------------------------------------
+"------------------------------------------------------------------------
+" statusLine
+"------------------------------------------------------------------------
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+          \ 'left': [
+              \ ['mode'],
+              \ ['readonly', 'filepath', 'modified']
+          \ ],
+          \ 'right': [
+              \ ['lineinfo'],
+              \ ['percent'],
+              \ [ 'fileformat', 'fileencoding', 'filetype' ]
+          \ ]
+      \ },
+      \ 'component': {
+          \ 'lineinfo': '%00l/%00L:%02v',
+          \ 'mode': 'LightlineMode',
+          \ 'filepath': '%F',
+      \ },
+      \ 'component_function': {
+      \   'mode': 'LightlineMode'
+      \ },
+      \ 'separator': { 'left': "", 'right': "" },
+      \ 'subseparator': { 'left': "|", 'right': "|" },
+  \ }
+
+function! LightlineMode()
+  return  &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ &ft == 'denite' ? 'Denite' :
+        \ &ft == 'defx' ? 'Defx' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+
+"------------------------------------------------------------------------
+" tabLine
+"------------------------------------------------------------------------
+
+let g:lightline.tabline = {
+      \ 'left': [ [ 'tabs' ] ],
+      \ 'right': [ [ 'close' ] ] }
+
+let g:lightline.tab_component_function = {
+      \ 'filename': 'LightlineTabFilename',
+      \ 'modified': 'lightline#tab#modified',
+      \ 'readonly': 'lightline#tab#readonly',
+      \ 'tabnum': 'lightline#tab#tabnum' }
+
+function! LightlineTabFilename(n) abort
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let _ = pathshorten(expand('#'.buflist[winnr - 1].':f'))
+  return _ !=# '' ? _ : '[No Name]'
+endfunction
+
+'''
+
+
+#------------------------------------------------------------------------
+# visual setting plugin
+#------------------------------------------------------------------------
+[[plugins]] # colorSchem
+repo = 'sjl/badwolf'
+
+
+#------------------------------------------------------------------------
 # size setting plugin
-#------------------------------------
+#------------------------------------------------------------------------
 [[plugins]] # size setting
 repo = 'simeji/winresizer'
 #https://github.com/simeji/winresizer
 
-#------------------------------------
+
+#------------------------------------------------------------------------
 # markdown setting
-#------------------------------------
+#------------------------------------------------------------------------
 # [[plugins]] # markdownFromat
 # repo = 'tpope/vim-markdown'
 
