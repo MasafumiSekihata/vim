@@ -1,0 +1,173 @@
+# プラグインを変更/追加した場合は :call dein#update() を実行
+
+#------------------------------------------------------------------------
+# dein setting
+#------------------------------------------------------------------------
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+#------------------------------------------------------------------------
+# denite setting
+#------------------------------------------------------------------------
+[[plugins]] # denit
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+
+    " denite設定呼び出し
+    autocmd FileType denite call s:denite_my_settings()
+    " denite設定関数
+    function! s:denite_my_settings() abort
+      nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+      nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+      nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+      nnoremap <silent><buffer><expr> q denite#do_map('quit')
+      nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+      nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+    endfunction
+
+    " deniteフィルタ設定呼び出し
+    autocmd FileType denite-filter call s:denite_filter_my_settings()
+    " deniteフィルタ設定関数
+    function! s:denite_filter_my_settings() abort
+      imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+    endfunction
+
+    " Deniteマッピング
+    nnoremap <silent> <space>df :<C-u>Denite file/rec<CR>
+    nnoremap <silent> <space>dl :<C-u>Denite line<CR>
+    " Denite grep検索
+    nnoremap <silent> <space>dg :<C-u>Denite grep -buffer-name=search-buffer-denite<CR>
+    " Denite grep検索結果を再表示する
+    nnoremap <silent> <space>dr :<C-u>Denite -resume -buffer-name=search-buffer-denite<CR>
+    " resumeした検索結果の次の行の結果へ飛ぶ
+    nnoremap <silent> <space>dn :<C-u>Denite -resume -buffer-name=search-buffer-denite -select=+1 -immediately<CR>
+    " resumeした検索結果の前の行の結果へ飛ぶ
+    nnoremap <silent> <space>dp :<C-u>Denite -resume -buffer-name=search-buffer-denite -select=-1 -immediately<CR>
+    nnoremap <silent> <space>db : <C-u>Denite buffer<CR>
+'''
+
+hook_post_source = '''
+    call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+    call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+    call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm'])
+    call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
+    call denite#custom#kind('file', 'default_action', 'split')
+    call denite#custom#var('grep', {
+        \ 'command': ['ag'],
+        \ 'default_opts': ['-i', '--vimgrep'],
+        \ 'recursive_opts': [],
+        \ 'pattern_opt': [],
+        \ 'separator': ['--'],
+        \ 'final_opts': [],
+        \ })
+    call denite#custom#var('grep', 'command', ['ag'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', [])
+    call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+
+'''
+
+
+#------------------------------------------------------------------------
+# statusLine setting plugin
+#------------------------------------------------------------------------
+[[plugins]] # lightline
+repo = 'itchyny/lightline.vim'
+hook_add ='''
+
+"------------------------------------------------------------------------
+" statusLine
+"------------------------------------------------------------------------
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+          \ 'left': [
+              \ ['mode'],
+              \ ['readonly', 'filepath', 'modified']
+          \ ],
+          \ 'right': [
+              \ ['lineinfo'],
+              \ ['percent'],
+              \ [ 'fileformat', 'fileencoding', 'filetype' ]
+          \ ]
+      \ },
+      \ 'component': {
+          \ 'lineinfo': '%00l/%00L:%02v',
+          \ 'mode': 'LightlineMode',
+          \ 'filepath': '%F',
+      \ },
+      \ 'component_function': {
+      \   'mode': 'LightlineMode'
+      \ },
+      \ 'separator': { 'left': "", 'right': "" },
+      \ 'subseparator': { 'left': "|", 'right': "|" },
+  \ }
+
+function! LightlineMode()
+  return  &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ &ft == 'denite' ? 'Denite' :
+        \ &ft == 'defx' ? 'Defx' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+
+"------------------------------------------------------------------------
+" tabLine
+"------------------------------------------------------------------------
+
+let g:lightline.tabline = {
+      \ 'left': [ [ 'tabs' ] ],
+      \ 'right': [ [ 'close' ] ] }
+
+let g:lightline.tab_component_function = {
+      \ 'filename': 'LightlineTabFilename',
+      \ 'modified': 'lightline#tab#modified',
+      \ 'readonly': 'lightline#tab#readonly',
+      \ 'tabnum': 'lightline#tab#tabnum' }
+
+function! LightlineTabFilename(n) abort
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let _ = pathshorten(expand('#'.buflist[winnr - 1].':f'))
+  return _ !=# '' ? _ : '[No Name]'
+endfunction
+
+'''
+
+
+#------------------------------------------------------------------------
+# visual setting plugin
+#------------------------------------------------------------------------
+[[plugins]] # colorSchem
+repo = 'sjl/badwolf'
+
+
+#------------------------------------------------------------------------
+# size setting plugin
+#------------------------------------------------------------------------
+[[plugins]] # size setting
+repo = 'simeji/winresizer'
+#https://github.com/simeji/winresizer
+
+
+#------------------------------------------------------------------------
+# markdown setting
+#------------------------------------------------------------------------
+# [[plugins]] # markdownFromat
+# repo = 'tpope/vim-markdown'
+
+[[plugins]] # markdownFormat
+repo = "violetyk/iikanji-markdown.vim"
+
+[[plugins]] # markdownTableFormat
+repo = 'dhruvasagar/vim-table-mode'
+hook_add ='''
+    nnoremap <silent> <C-m><C-d> :TableModeToggle<CR>
+'''
+
+[[plugins]] # markdownPreview
+repo = 'previm/previm'
+
