@@ -148,8 +148,8 @@ repo = 'sjl/badwolf'
 #------------------------------------------------------------------------
 # size setting plugin
 #------------------------------------------------------------------------
-[[plugins]] # size setting
-repo = 'simeji/winresizer'
+#[[plugins]] # size setting
+#repo = 'simeji/winresizer'
 #https://github.com/simeji/winresizer
 
 
@@ -170,4 +170,14 @@ hook_add ='''
 
 [[plugins]] # markdownPreview
 repo = 'previm/previm'
+
+#------------------------------------------------------------------------
+# angular setting
+#------------------------------------------------------------------------
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+on_i = 1
+merged = '0'
+hook_source = 'call coil398#init#coc#hook_source()'
 

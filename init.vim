@@ -43,6 +43,10 @@ if dein#check_install()
   call dein#install()
 endif
 
+"------------------------------------------------------------
+" coc.nvim settinng
+"------------------------------------------------------------
+
 
 "------------------------------------------------------------
 " mode settinng
@@ -60,6 +64,7 @@ set encoding=utf-8
 "------------------------------------------------------------
 set nobackup "バックアップファイル非作成
 set noswapfile "スワップファイル非作成
+set nowritebackup
 set autoread "変更を自動読み込み
 ""ctrl-n にNERDTreeToggle コマンドをマップ
 "nnoremap <silent><C-n> :NERDTreeTabsToggle<CR>
@@ -73,8 +78,8 @@ set splitbelow "水平分割時に下に表示
 set splitright "縦分割時に右に表示
 "set noequalalways "分割時に自動調整を無効化
 set expandtab "tabを複数のspaceに置き換え
-set tabstop=4 "tabは半角4文字
-set shiftwidth=4 "tabの幅
+set tabstop=2 "tabは半角4文字
+set shiftwidth=2 "tabの幅
 set whichwrap=b,s,h,l,<,>,[,] " カーソルを行頭、行末で止まらないようにする
 set list listchars=tab:»-,trail:-,nbsp:%,eol:↲ " タブ、空白、改行を表示 :set nolist で非表示に変更
 " ctlr+j,h でカーソル部分から改行
@@ -114,6 +119,11 @@ nnoremap c "_c
 " usキーボード対応
 nnoremap ; :
 nnoremap : ;
+"
+"------------------------------------------------------------
+" number setting
+"------------------------------------------------------------
+set nrformats=
 
 "------------------------------------------------------------
 " tab setting
@@ -136,6 +146,7 @@ nnoremap <space>bl :bnext<CR>
 " terminal setting
 "------------------------------------------------------------
 nnoremap <space>tt :tab term<CR>
+nnoremap <ESC><ESC><ESC> <C-\><C-N>
 
 "------------------------------------------------------------
 " statusline setting
